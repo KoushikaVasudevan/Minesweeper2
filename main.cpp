@@ -1,40 +1,26 @@
-#include <cstdlib>
-#include <ctime>
 #include "minesweeper.h"
+#include <iostream>
 using namespace std;
 
 int main() {
-  int row;
-  int col;
-  int GameStatus = 1;
-  
-  srand((unsigned int)time(NULL));
-  Minesweeper m;
+    Minesweeper game;
+    game.printBoard();
 
-  while (GameStatus == 1) {
-    cout << "\nEnter row(0-5): ";
-    cin >> row;
+    int row, col, result;
+    while (true) {
+        cout << "Enter row and column to reveal: ";
+        cin >> row >> col;
 
-    cout << "Enter column(0-5): ";
-    cin >> col;
-    cout << "\n";
+        result = game.revealCell(row, col);
+        game.printBoard();
 
-    GameStatus = m.revealCell(row, col);
-    m.printBoard();
-  }
-  
-  if(GameStatus == 0){
-    cout << "\n";
-    cout << "--------------------------------------" << endl;
-    cout << "Congratulations! You win!" << endl;
-    cout << "--------------------------------------" << endl;
-  }
-  else{
-    cout << "\n";
-    cout << "--------------------------------------" << endl;
-    cout << "Game Over! You stepped on a mine. " << endl;
-    cout << "--------------------------------------" << endl;
-  }
-
-  return 0;
+        if (result == -1) {
+            cout << "Game Over! You hit a mine." << endl;
+            break;
+        } else if (result == 0) {
+            cout << "Congratulations! You cleared the board." << endl;
+            break;
+        }
+    }
+    return 0;
 }
