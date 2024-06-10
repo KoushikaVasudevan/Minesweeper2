@@ -24,6 +24,10 @@ void Minesweeper::revealAdjacent(int x, int y) {
 }
 
 int Minesweeper::revealCell(int x, int y) {
+    if(x >= n || y >= n || x < 0 || y < 0) {
+        return -2;
+    }
+    
   if (firstMove) {
     firstRow = x;
     firstCol = y;

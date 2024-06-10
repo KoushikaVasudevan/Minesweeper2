@@ -10,7 +10,7 @@ void GameBoard::generateBoard(int firstRow, int firstCol, int noOfMines) {
     do {
       x = rand() % n;
       y = rand() % n;
-    } while ((x == firstRow && y == firstCol) || grid[x][y].isMine());
+    } while ((x == firstRow && y == firstCol) || grid[x][y].isMine() || (x < 0 || y < 0 || x >= n || y >= n));
 
     grid[x][y].placeMine();
 
